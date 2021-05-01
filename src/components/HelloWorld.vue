@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <b-row>
+    <b-row class="row">
       <b-col md="1"></b-col>
       <b-col md="5">
         <div>
@@ -13,10 +13,8 @@
         </div>
         <h1 class="main-heading mt-5">Delivery cost</h1>
         <p class="main-subheading">Enter name of the city to count delivery cost</p>
-        <div class="search-box my-4">
-          <input type="text" class="search" placeholder="Enter name of the city">
-          <button class="search-btn">Enter</button>
-        </div>
+        <input type="text" class="search my-4" placeholder="Enter name of the city">
+        <button class="search-btn">Enter</button>
         <h4 class="table-heading mb-4">Most popular cities</h4>
         <div class="table-row">
           <div class="table-col">
@@ -40,7 +38,7 @@
             <span>Pavlodar</span>
           </div>
         </div>
-        <footer class="desktop-footer">
+        <footer class="desktop-footer mt-5">
           <span>All rights reserved</span>
           <br>
           <span>Fast service 2021</span>
@@ -56,7 +54,7 @@
         <img src="../assets/free-shipping 1.png" alt="" class="car-img">
         <img src="../assets/Vector 1.png" alt="" class="road-img">
         <img src="../assets/Vector 2.png" alt="" class="peshehod">
-        <h4 class="img-title">Fast Service</h4>
+        <h4 class="img-title">Fast <br>Service</h4>
       </b-col>
     </b-row>
   </div>
@@ -77,6 +75,10 @@ export default {
 
 html, * {
   font-family: 'Roboto', sans-serif;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 .main {
@@ -101,24 +103,22 @@ html, * {
   color: rgba(40, 48, 68, 0.5);
 }
 
-.search-box {
-  height: 60px;
-  overflow: hidden;
-}
 
 .search {
   background: #FFFFFF;
   border: 1px solid #E9F0EB;
-  box-sizing: content-box;
-  border-radius: 50px;
-  height: 90%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  border-right: none;
+  height: 65px;
   width: 65%;
   padding-left: 30px;
   font-weight: 700;
   font-size: 24px;
   color: #283044;
-  border-right: none;
   padding-top: 0px;
+  padding-right: 50px;
 }
 
 .search:focus {
@@ -140,40 +140,57 @@ html, * {
   background: linear-gradient(279.56deg, #65B3E4 15.15%, rgba(120, 161, 187, 0) 171.55%);
   border-radius: 50px;
   width: 25%;
-  height: 100%;
-  margin-left: -100px;
+  height: 65px;
+  margin-left: -50px;
   box-sizing: border-box;
   font-weight: 700;
   text-transform: uppercase;
   size: 24px;
   color: #FFFFFF;
   border: none;
+  vertical-align: middle;
+  transform: translateY(-3px);
 }
 
 .image-column {
-  overflow: hidden;
   position: relative;
   background-color: #F7F7F7;
   border-radius: 40px 0px 0px 40px;
-  height: 100vh;
+  height: 97vh;
+  overflow: hidden;
+  padding: 0px;
+  margin: 0px;
+  border: none;
 }
 
 .car-img {
+  left: 100px;
   position: absolute;
   z-index: 10;
+  height: 450px;
+  width: 450px;
+  top: 100px;
 }
 
 .road-img {
+  left: 100px;
+  top: 50px;
   position: absolute;
   z-index: 7;
 }
 
 .peshehod {
+  left: 100px;
+  top: 250px;
   position: absolute;
   z-index: 8;
 }
 
 .img-title {
+  font-size: 75px;
+  left: 390px;
+  top: 20px;
+  color: rgba(40, 48, 68, 0.1);
   position: absolute;
   z-index: 9;
 }
@@ -195,18 +212,20 @@ html, * {
   padding-top: 10px;
 }
 
-.desktop-footer {
-  position: absolute;
-  bottom: 10px;
-}
 
 .desktop-footer {
   size: 14px;
   color: #283044;
   opacity: 0.5;
 }
-.payment-images{
-  
+
+.payment-images {
+  float: right;
+  padding-right: 10%;
 }
+.payment-images img{
+  margin-left: 10px;
+}
+
 
 </style>
