@@ -13,9 +13,10 @@
         </div>
         <h1 class="main-heading mt-5">Delivery cost</h1>
         <p class="main-subheading">Enter name of the city to count delivery cost</p>
-        <input type="text" class="search my-4" placeholder="Enter name of the city">
-        <button class="search-btn">Enter</button>
-        <h4 class="table-heading mb-4">Most popular cities</h4>
+        <input type="text" :class="!this.error ? 'search mt-4' : 'search-error mt-4'" placeholder="Enter name of the city" v-model="city" @keyup.enter="search">
+        <button :class="!this.error ? 'search-btn' : 'error-btn'" @click="search">Enter</button>
+        <p class="error mt-1" v-if="this.error">{{ this.error }}</p>
+        <h4 class="table-heading my-4">Most popular cities</h4>
         <div class="table-row">
           <div class="table-col">
             <span>Nur-Sultan</span>
@@ -50,7 +51,14 @@
           </div>
         </footer>
       </b-col>
-      <b-col md="6" class="image-column">
+      <b-col md="6" class="deliveries" v-if="this.deliveries && !this.error">
+        <b-card img-right v-for="delivery in deliveries" :class="delivery.available ? 'delivery' : 'delivery unavailable'">
+          <h3>{{ delivery.type }}</h3>
+          <p v-if="!delivery.available">Not available in that city</p>
+          <h4>{{ delivery.price }}$</h4>
+        </b-card>
+      </b-col>
+      <b-col md="6" class="image-column" v-else>
         <img src="../assets/free-shipping 1.png" alt="" class="car-img">
         <img src="../assets/Vector 1.png" alt="" class="road-img">
         <img src="../assets/Vector 2.png" alt="" class="peshehod">
@@ -65,7 +73,34 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  data() {
+    return {
+      city: null,
+      deliveries: null,
+      error: null
+    }
+  },
+  mounted() {
+
+  },
+  methods: {
+    async search() {
+      try {
+        const response = await fetch(`https://qvjgl.mocklab.io/delivery/check?search=${this.city.toLowerCase()}`);
+        const result = await response.json();
+        this.deliveries = result;
+        this.error = null;
+      } catch (e){
+        this.error = ("We didn't found such city. Please check spelling");
+      }
+    },
+    wipe() {
+      this.error = null;
+      this.city = null;
+    }
+  },
+
 }
 </script>
 
@@ -81,7 +116,25 @@ html {
   overflow-y: scroll;
 }
 
-.main {
+.error{
+  font-weight: normal;
+  font-size: 16px;
+  color: #FF4757;
+}
+.error-btn{
+  background: linear-gradient(279.56deg, #FF4757 15.15%, rgba(255, 255, 255, 0) 171.55%);
+  border-radius: 50px;
+  width: 25%;
+  height: 65px;
+  margin-left: -50px;
+  box-sizing: border-box;
+  font-weight: 700;
+  text-transform: uppercase;
+  size: 24px;
+  color: #FFFFFF;
+  border: none;
+  vertical-align: middle;
+  transform: translateY(-3px);
 }
 
 .nav-brand span {
@@ -120,6 +173,23 @@ html {
   padding-top: 0px;
   padding-right: 50px;
 }
+.search-error{
+  border: 1px solid #FF4757;
+  background: #FFFFFF;
+  box-sizing: border-box;
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  border-right: none;
+  height: 65px;
+  width: 65%;
+  padding-left: 30px;
+  font-weight: 700;
+  font-size: 24px;
+  color: #283044;
+  padding-top: 0px;
+  padding-right: 50px;
+  outline: none;
+}
 
 .search:focus {
   outline: none;
@@ -150,6 +220,13 @@ html {
   border: none;
   vertical-align: middle;
   transform: translateY(-3px);
+}
+.deliveries{
+  background-color: #F7F7F7;
+  border-radius: 40px 0px 0px 40px;
+}
+.unavailable h3,h4{
+  opacity: 50%;
 }
 
 .image-column {
@@ -211,8 +288,31 @@ html {
   padding-bottom: 5px;
   padding-top: 10px;
 }
-
-
+.delivery{
+  width: 60%;
+  margin-left: 10%;
+  margin-top: 5%;
+  background: #FFFFFF;
+  border-radius: 22px;
+  border: none;
+  height: 25%;
+}
+.delivery h3{
+  text-transform: capitalize;
+  color: #283044;
+  font-size: 30px;
+  font-weight: bold;
+}
+.delivery h4{
+  color: #78A1BB;
+  font-size: 40px;
+  font-weight: bold;
+}
+.delivery p{
+  color: #283044;
+  opacity: 50%;
+  font-size: 20px;
+}
 .desktop-footer {
   size: 14px;
   color: #283044;
