@@ -303,7 +303,7 @@ html {
   color: #283044;
   font-size: 30px;
   font-weight: bold;
-  opacity: 50%;
+  opacity: 0.5;
 }
 .delivery-price{
   color: #78A1BB;
@@ -314,11 +314,11 @@ html {
   color: #78A1BB;
   font-size: 40px;
   font-weight: bold;
-  opacity: 50%;
+  opacity: 0.5;
 }
 .delivery p{
   color: #283044;
-  opacity: 50%;
+  opacity: 0.5;
   font-size: 20px;
 }
 .desktop-footer {
