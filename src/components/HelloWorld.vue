@@ -2,7 +2,7 @@
   <div class="main">
     <b-row class="row">
       <b-col md="1"></b-col>
-      <b-col md="5">
+      <b-col md="5" class="px-sm-5 p-lg-0">
         <div>
           <b-navbar variant="faded" type="light">
             <b-navbar-brand href="#" class="nav-brand">
@@ -52,10 +52,10 @@
         </footer>
       </b-col>
       <b-col md="6" class="deliveries" v-if="this.deliveries && !this.error">
-        <b-card img-right v-for="delivery in deliveries" :class="delivery.available ? 'delivery' : 'delivery unavailable'">
-          <h3>{{ delivery.type }}</h3>
+        <b-card img-right v-for="delivery in deliveries" class="delivery">
+          <h3 :class="delivery.available ? 'delivery-header' : 'delivery-header-u'">{{ delivery.type }}</h3>
           <p v-if="!delivery.available">Not available in that city</p>
-          <h4>{{ delivery.price }}$</h4>
+          <h4 :class="delivery.available ? 'delivery-price' : 'delivery-price-u'">{{ delivery.price }}$</h4>
         </b-card>
       </b-col>
       <b-col md="6" class="image-column" v-else>
@@ -225,10 +225,6 @@ html {
   background-color: #F7F7F7;
   border-radius: 40px 0px 0px 40px;
 }
-.unavailable h3,h4{
-  opacity: 50%;
-}
-
 .image-column {
   position: relative;
   background-color: #F7F7F7;
@@ -295,18 +291,30 @@ html {
   background: #FFFFFF;
   border-radius: 22px;
   border: none;
-  height: 25%;
 }
-.delivery h3{
+.delivery-header{
   text-transform: capitalize;
   color: #283044;
   font-size: 30px;
   font-weight: bold;
 }
-.delivery h4{
+.delivery-header-u{
+  text-transform: capitalize;
+  color: #283044;
+  font-size: 30px;
+  font-weight: bold;
+  opacity: 50%;
+}
+.delivery-price{
   color: #78A1BB;
   font-size: 40px;
   font-weight: bold;
+}
+.delivery-price-u{
+  color: #78A1BB;
+  font-size: 40px;
+  font-weight: bold;
+  opacity: 50%;
 }
 .delivery p{
   color: #283044;
